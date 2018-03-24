@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Katakana-Sensei</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/stylesheets/reset.css" type="text/css"/>
+    <link rel="stylesheet" href="assets/stylesheets/screen.css" type="text/css"/>
+    <link rel="manifest" href="assets/manifest/manifest" type="application/manifest+json">
+</head>
+<body>
+<header>
+    <img id="homeIcon" src="assets/images/home-transparant.png" alt="home"/>
+    <div id="header-background"></div>
+    <img id="settingsIcon" src="assets/images/cogwheel-transparant.png" alt="settings"/>
+</header>
+<section id="settingsScreen" class="collapsed">
+    <ul>
+        <li id="dragon">dragon</li>
+        <li id="sakura">flower</li>
+        <li id="torii">origami</li>
+    </ul>
+
+    <label for="colorPicker">Pick your color
+        <input type="color" name="colorPicker" id="colorPicker">
+    </label>
+</section>
+<section id="homeScreen" class="">
+    <ul>
+        <li id="katakana">katakana</li>
+        <li id="flashcard">flashcards</li>
+        <li id="stats">statistics</li>
+    </ul>
+</section>
+<section class="collapsed" id="katakanaScreen">
+</section>
+<section class="collapsed" id="flashcardScreen">
+    <div id="questions">
+        <div class="kana" id="questionKana"></div>
+        <input id="answerField" type="text" placeholder="type your answer here">
+        <button id="answerButton">answer</button>
+    </div>
+    <ul id="summary">
+    </ul>
+</section>
+<section class="collapsed" id="statisticsScreen">
+    <div id="statisticsBody"></div>
+</section>
+
+<footer>
+</footer>
+<script src="assets/javascripts/flashcard.js"></script>
+<script src="assets/javascripts/script.js"></script>
+</body>
+</html>
