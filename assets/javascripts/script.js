@@ -16,33 +16,26 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     const allLi = document.getElementsByTagName('li');
-    Array.from(allLi).forEach(li = > li.addEventListener('click', function () {
+    Array.from(allLi).forEach(li => li.addEventListener('click', function () {
         li.classList.add('buttonPush');
         setTimeout(function () {
             li.classList.remove('buttonPush');
         }, 500);
-
-    })
-)
-    ;
+    }));
 
     const homeLi = home.getElementsByTagName('li');
-    Array.from(homeLi).forEach(li = > li.addEventListener('click', function () {
+    Array.from(homeLi).forEach(li => li.addEventListener('click', function () {
         const screen = buttonToScreen[li.id];
         setTimeout(function () {
             closeAllScreens();
             screen.classList.remove('collapsed');
         }, 500);
-    })
-)
-    ;
+    }));
 
     const settingsLi = settings.getElementsByTagName('li');
-    Array.from(settingsLi).forEach(li = > li.addEventListener('click', function () {
+    Array.from(settingsLi).forEach(li => li.addEventListener('click', function () {
         changeStyle(li.innerHTML);
-    })
-)
-    ;
+    }));
 
     const colorPicker = document.getElementById('colorPicker');
     colorPicker.value = '#cc0022';
@@ -72,9 +65,7 @@ function changeColor(colorcode) {
 }
 
 function closeAllScreens() {
-    screens.forEach(screen = > screen.classList.add('collapsed')
-)
-    ;
+    screens.forEach(screen => screen.classList.add('collapsed'));
 }
 
 function openHome() {

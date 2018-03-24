@@ -18,9 +18,7 @@ romanjiArray[16] = 'chi';
 romanjiArray[17] = 'tsu';
 romanjiArray[27] = 'fu';
 romanjiArray[50] = 'n';
-emptyIndices.forEach(i = > romanjiArray[i] = ''
-)
-;
+emptyIndices.forEach(i => romanjiArray[i] = '');
 
 let VOCAB_OBJECT = {
     ROMANJI: romanjiArray,
