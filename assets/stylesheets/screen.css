@@ -1,9 +1,9 @@
 :root {
-    --flowerColor: #FFBBFF;
+    --flowerColor: #ffbbff;
     --flowerUrl: url(../images/flower.png);
-    --dragonColor: #CC0022;
+    --dragonColor: #cc0022;
     --dragonUrl: url(../images/dragon.png);
-    --origamiColor: #66CC66;
+    --origamiColor: #66cc66;
     --origamiUrl: url(../images/origami.png);
     --baseColor: var(--origamiColor);
     --baseUrl: var(--origamiUrl);

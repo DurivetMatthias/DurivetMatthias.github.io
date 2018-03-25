@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }));
 
     const colorPicker = document.getElementById('colorPicker');
-    colorPicker.value = '#cc0022';
+    colorPicker.value = '#66CC66';
     colorPicker.addEventListener('change', function () {
         changeColor(colorPicker.value);
     });
@@ -61,7 +61,8 @@ document.addEventListener("DOMContentLoaded", function () {
     function changeStyle(name) {
         document.documentElement.style.setProperty('--baseColor', `var(--${name}Color)`);
         document.documentElement.style.setProperty('--baseUrl', `var(--${name}Url)`);
-        colorPicker.value = document.documentElement.style.getPropertyValue('background-color');
+        colorPicker.value = getComputedStyle(document.documentElement).getPropertyValue('--baseColor').replace(' ', '');
+        /* getProperty returns an extra space at the start */
     }
 });
 

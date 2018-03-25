@@ -37,6 +37,7 @@ const answerField = document.getElementById('answerField');
 document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById('flashcard').addEventListener('click', function () {
+        Array.from(flashcard.getElementsByTagName('li')).forEach(li => li.remove());
         initFlashcards();
         nextFlashcard();
     });
