@@ -27,8 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
     Array.from(homeLi).forEach(li => li.addEventListener('click', function () {
         const screen = buttonToScreen[li.id];
         setTimeout(function () {
-            closeAllScreens();
-            screen.classList.remove('collapsed');
+            open(screen);
         }, 500);
     }));
 
@@ -45,12 +44,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const homeIcon = document.getElementById('homeIcon');
     homeIcon.addEventListener('click', function () {
-        openHome();
+        open(home);
     });
 
+    let previousScreen = home;
     const settingsIcon = document.getElementById('settingsIcon');
     settingsIcon.addEventListener('click', function () {
-        openSettings();
+        if (getActiveScreen() !== settings) {
+            previousScreen = getActiveScreen();
+            open(settings);
+        } else {
+            open(previousScreen);
+        }
     });
 
     function changeStyle(name) {
@@ -65,15 +70,14 @@ function changeColor(colorcode) {
 }
 
 function closeAllScreens() {
-    screens.forEach(screen => screen.classList.add('collapsed'));
+    screens.forEach(screen => screen.classList.remove('active'));
 }
 
-function openHome() {
+function open(screen) {
     closeAllScreens();
-    home.classList.remove('collapsed');
+    screen.classList.add('active');
 }
 
-function openSettings() {
-    closeAllScreens();
-    settings.classList.remove('collapsed');
+function getActiveScreen() {
+    return document.getElementsByClassName('active')[0];
 }

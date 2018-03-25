@@ -87,10 +87,11 @@ section {
     height: 80vh;
     font-size: 24px;
     text-align: center;
+    display: none;
 }
 
-.collapsed {
-    display: none;
+.active {
+    display: block;
 }
 
 .kana {
@@ -104,12 +105,12 @@ section {
 }
 
 #questionKana {
-    margin: 10vh auto;
+    margin: 5vh auto;
     display: block;
-    width: 40vw;
-    height: 40vw;
-    line-height: 40vw;
-    font-size: 40vw;
+    width: 20vh;
+    height: 20vh;
+    line-height: 20vh;
+    font-size: 20vh;
 }
 
 .correct {
