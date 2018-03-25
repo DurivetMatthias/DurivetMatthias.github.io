@@ -70,7 +70,7 @@ footer::after {
     }
 }
 
-@media screen and (max-height: 100px) {
+@media screen and (max-height: 300px) {
     /* when the keyboard is opened on mobile or when the device is really small */
     footer {
         opacity: 0;
