@@ -50,15 +50,6 @@ document.addEventListener("DOMContentLoaded", function () {
             nextFlashcard();
         }
     });
-
-    const footer = document.getElementsByTagName('footer')[0];
-    answerField.addEventListener('focus', function () {
-        footer.classList.add('hideBackgroundImage');
-    });
-
-    answerField.addEventListener('blur', function () {
-        footer.classList.remove('hideBackgroundImage');
-    });
 });
 
 function initFlashcards() {

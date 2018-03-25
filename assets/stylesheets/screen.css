@@ -41,6 +41,27 @@ header {
     border-right: solid 10px #000000;
 }
 
+footer {
+    height: 10vh;
+    background: var(--baseColor) var(--baseUrl) round;
+    background-size: contain;
+    opacity: 1;
+    -webkit-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+}
+
+/*
+footer::after {
+    height: 10vh;
+    content: "";
+    background:  var(--baseColor) var(--baseUrl) round;
+    background-size: contain;
+    opacity: 1;
+    z-index: -1;
+    -webkit-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+}*/
+
 @media screen and (min-width: 600px) {
     section {
         width: 50vw;
@@ -52,6 +73,13 @@ header {
 @media screen and (max-width: 599px) {
     .hideBackgroundImage {
         background-image: none;
+    }
+}
+
+@media screen and (max-height: 300px) {
+    /* when the keyboard is opened on mobile or when the device is really small */
+    footer {
+        opacity: 0;
     }
 }
 
@@ -137,12 +165,6 @@ li {
     border-radius: 20px;
     padding: 0.5vh;
     margin-bottom: 0.5vh;
-}
-
-footer {
-    height: 10vh;
-    background: var(--baseColor) var(--baseUrl) round;
-    background-size: contain;
 }
 
 /*
