@@ -75,8 +75,16 @@ function closeAllScreens() {
 }
 
 function open(screen) {
-    closeAllScreens();
-    screen.classList.add('active');
+    let oldScreen = getActiveScreen();
+    oldScreen.classList.add('disappear');
+    setTimeout(function () {
+        oldScreen.classList.remove('disappear', 'active');
+        screen.classList.add('appear');
+        setTimeout(function () {
+            screen.classList.add('active');
+            screen.classList.remove('appear');
+        }, 250);
+    }, 500);
 }
 
 function getActiveScreen() {

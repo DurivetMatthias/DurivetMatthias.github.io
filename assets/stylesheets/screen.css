@@ -50,19 +50,15 @@ footer {
     transition: opacity 1s ease-in-out;
 }
 
-/*
-footer::after {
-    height: 10vh;
-    content: "";
-    background:  var(--baseColor) var(--baseUrl) round;
-    background-size: contain;
-    opacity: 1;
-    z-index: -1;
-    -webkit-transition: opacity 1s ease-in-out;
-    transition: opacity 1s ease-in-out;
-}*/
+section {
+    height: 80vh;
+    font-size: 24px;
+    text-align: center;
+    display: none;
+}
 
 @media screen and (min-width: 600px) {
+    /*pc or larger mobile devices */
     section {
         width: 50vw;
         margin-left: auto;
@@ -70,18 +66,29 @@ footer::after {
     }
 }
 
-@media screen and (max-height: 500px) {
-    /* when the keyboard is opened on mobile or when the device is really small */
-    footer {
-        opacity: 0;
+@media screen and (max-width: 599px) {
+    /*mobile*/
+    .buttonPush {
+        animation-name: buttonPush;
+        animation-duration: 100ms;
+        animation-timing-function: linear;
     }
-}
 
-section {
-    height: 80vh;
-    font-size: 24px;
-    text-align: center;
-    display: none;
+    @keyframes buttonPush {
+        from {
+            width: 80%;
+        }
+        to {
+            width: 75%;
+        }
+    }
+
+    @media screen and (max-height: 500px) {
+        /* when the keyboard is opened on mobile or when the device is really small */
+        footer {
+            opacity: 0;
+        }
+    }
 }
 
 .active {
@@ -116,7 +123,7 @@ section {
 }
 
 #katakanaScreen {
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 input[type = color] {
@@ -145,7 +152,7 @@ li {
 }
 
 #flashcardScreen {
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 #summary ul {
@@ -173,21 +180,38 @@ li {
     to {height: 8vh;}
 }
 */
-.buttonPush {
-    animation-name: buttonPush;
-    animation-duration: 50ms;
+
+.disappear {
+    opacity: 1;
+    display: block;
+    animation-name: disappear;
     animation-timing-function: linear;
+    animation-duration: 0.5s;
 }
 
-@keyframes buttonPush {
+.appear {
+    opacity: 0;
+    display: block;
+    animation-name: appear;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    animation-duration: 0.25s;
+}
+
+@keyframes disappear {
     from {
-        width: 80%;
-        height: 10vh;
-        line-height: 10vh;
+        opacity: 1;
     }
     to {
-        width: 76%;
-        height: 9.5vh;
-        line-height: 9.5vh;
+        opacity: 0;
+    }
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
     }
 }
