@@ -3,7 +3,7 @@ const katakana = document.getElementById('katakanaScreen');
 const flashcard = document.getElementById('flashcardScreen');
 const stats = document.getElementById('statisticsScreen');
 const settings = document.getElementById('settingsScreen');
-const screens = [home, katakana, flashcard, stats, settings];
+//const screens = [home, katakana, flashcard, stats, settings];
 const buttonToScreen = {'katakana': katakana, 'stats': stats, 'flashcard': flashcard};
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let div = document.createElement('div');
         div.classList.add('kana');
         if (letter !== '') div.innerHTML = letter + '<br>' + VOCAB_OBJECT.KATAKANA[i];
-        katakana.append(div);
+        katakana.appendChild(div);
     });
 
     const allLi = document.getElementsByTagName('li');
@@ -59,19 +59,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function changeStyle(name) {
-        document.documentElement.style.setProperty('--baseColor', `var(--${name}Color)`);
-        document.documentElement.style.setProperty('--baseUrl', `var(--${name}Url)`);
+        document.documentElement.style.setProperty('--baseColor', `var(--${name}Color)`, '');
+        document.documentElement.style.setProperty('--baseUrl', `var(--${name}Url)`, '');
         colorPicker.value = getComputedStyle(document.documentElement).getPropertyValue('--baseColor').replace(' ', '');
         /* getProperty returns an extra space at the start */
     }
 });
 
 function changeColor(colorcode) {
-    document.documentElement.style.setProperty('--baseColor', colorcode);
-}
-
-function closeAllScreens() {
-    screens.forEach(screen => screen.classList.remove('active'));
+    document.documentElement.style.setProperty('--baseColor', colorcode, '');
 }
 
 function open(screen) {

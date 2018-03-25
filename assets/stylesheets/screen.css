@@ -155,31 +155,12 @@ li {
     overflow-y: auto;
 }
 
-#summary ul {
-    text-align: center;
-}
-
-#summary li {
-    width: 80%;
-    height: auto;
-    line-height: normal;
-    background-color: #000000;
-    border-radius: 20px;
-    padding: 0.5vh;
-    margin-bottom: 0.5vh;
-}
-
-/*
-.iconPush{
-    animation-name: iconPush;
-    animation-duration: 50ms;
+#summary div {
+    animation-name: appear;
     animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    animation-duration: 200ms;
 }
-@keyframes iconPush {
-    from {height: 9vh;}
-    to {height: 8vh;}
-}
-*/
 
 .disappear {
     opacity: 1;

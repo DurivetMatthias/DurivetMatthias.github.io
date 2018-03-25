@@ -53,11 +53,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+const questions = document.getElementById('questions');
 function initFlashcards() {
     usedIndices = VOCAB_OBJECT.EMPTY_INDICES.slice();
     questionedKatakana = [];
     questionResults = [];
     currentAnswer = '';
+    questions.style.display = 'block';
+    summary.innerHTML = '';
 }
 
 function nextFlashcard() {
@@ -81,22 +84,32 @@ function showFlashcard() {
     answerField.value = '';
 }
 
+const summary = document.getElementById('summary');
 function showFlashcardSummary() {
+    questions.style.display = 'none';
     for (let i = 0; i < questionedKatakana.length; i++) {
-        let li = document.createElement('li');
-        li.innerHTML = questionedKatakana[i];
-        if (questionResults[i]) {
-            li.classList.add('correct');
-        } else {
-            li.classList.add('incorrect');
+        let div;
+        let katakana = questionedKatakana[i];
+        let romanji = VOCAB_OBJECT.ROMANJI[usedIndices[i + emptyIndices.length]];
+        if (katakana !== '' && romanji !== '') {
+            setTimeout(function () {
+                div = document.createElement('div');
+                div.classList.add('kana');
+                div.innerHTML = katakana + '<br>' + romanji;
+                if (questionResults[i]) {
+                    div.classList.add('correct');
+                } else {
+                    div.classList.add('incorrect');
+                }
+                summary.appendChild(div);
+            }, 200 * i);
         }
-        document.getElementById('summary').append(li);
     }
 }
 
 function checkFlashcard() {
     const answer = answerField.value;
-    if (answer !== null || answer !== '') {
+    if (currentAnswer !== '') {
         questionResults.push(answer.toLowerCase() === currentAnswer);
     }
 }
