@@ -58,6 +58,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    Array.from(document.getElementsByClassName('collapser')).forEach(element => element.addEventListener('click', function () {
+        element.nextElementSibling.classList.toggle('collapsed');
+    }));
+
     function changeStyle(name) {
         document.documentElement.style.setProperty('--baseColor', `var(--${name}Color)`, '');
         document.documentElement.style.setProperty('--baseUrl', `var(--${name}Url)`, '');

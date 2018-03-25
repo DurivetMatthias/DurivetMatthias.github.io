@@ -54,13 +54,24 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 const questions = document.getElementById('questions');
+const correct = document.getElementById('correct');
+const incorrect = document.getElementById('incorrect');
+const progress = document.getElementById('progress');
+
 function initFlashcards() {
     usedIndices = VOCAB_OBJECT.EMPTY_INDICES.slice();
     questionedKatakana = [];
     questionResults = [];
     currentAnswer = '';
     questions.style.display = 'block';
-    summary.innerHTML = '';
+    summary.style.display = 'none';
+    correct.innerHTML = '';
+    incorrect.innerHTML = '';
+    updateProgress();
+}
+
+function updateProgress() {
+    progress.innerHTML = questionedKatakana.length + '/' + (VOCAB_OBJECT.KATAKANA.length - emptyIndices.length);
 }
 
 function nextFlashcard() {
@@ -82,26 +93,31 @@ function showFlashcard() {
     questionedKatakana.push(VOCAB_OBJECT.KATAKANA[random]);
     katakanaQuestion.innerHTML = VOCAB_OBJECT.KATAKANA[random];
     answerField.value = '';
+    updateProgress();
 }
 
 const summary = document.getElementById('summary');
 function showFlashcardSummary() {
     questions.style.display = 'none';
+    summary.style.display = 'block';
     for (let i = 0; i < questionedKatakana.length; i++) {
         let div;
         let katakana = questionedKatakana[i];
         let romanji = VOCAB_OBJECT.ROMANJI[usedIndices[i + emptyIndices.length]];
-        if (katakana !== '' && romanji !== '') {
+        if (katakana !== '') {
             setTimeout(function () {
                 div = document.createElement('div');
                 div.classList.add('kana');
                 div.innerHTML = katakana + '<br>' + romanji;
                 if (questionResults[i]) {
-                    div.classList.add('correct');
+                    let amount = parseInt(correct.previousElementSibling.firstElementChild.innerHTML);
+                    correct.previousElementSibling.firstElementChild.innerHTML = amount + 1;
+                    correct.appendChild(div);
                 } else {
-                    div.classList.add('incorrect');
+                    let amount = parseInt(incorrect.previousElementSibling.firstElementChild.innerHTML);
+                    incorrect.previousElementSibling.firstElementChild.innerHTML = amount + 1;
+                    incorrect.appendChild(div);
                 }
-                summary.appendChild(div);
             }, 200 * i);
         }
     }

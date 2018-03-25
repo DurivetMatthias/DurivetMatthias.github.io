@@ -114,16 +114,27 @@ section {
     font-size: 20vh;
 }
 
-.correct {
-    color: #008000;
-}
-
-.incorrect {
-    color: #800000;
-}
-
 #katakanaScreen {
     overflow-y: auto;
+}
+
+#progress {
+    margin: 1vh;
+}
+
+.collapser {
+    padding: 1vh;
+    margin: 2vh;
+    border: solid 3px #000000;
+    border-radius: 20px;
+}
+
+.collapser:after {
+    content: ' +';
+}
+
+.collapsed {
+    display: none;
 }
 
 input[type = color] {

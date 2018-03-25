@@ -36,11 +36,17 @@
 </section>
 <section id="flashcardScreen">
     <div id="questions">
+        <p id="progress"></p>
         <div class="kana" id="questionKana"></div>
         <input id="answerField" type="text" placeholder="type your answer here">
         <button id="answerButton">answer</button>
     </div>
-    <div id="summary"></div>
+    <div id="summary">
+        <h2 class="collapser">incorrect: <span>0</span></h2>
+        <div id="incorrect"></div>
+        <h2 class="collapser">correct: <span>0</span></h2>
+        <div id="correct" class="collapsed"></div>
+    </div>
 </section>
 <section id="statisticsScreen">
     <div id="statisticsBody"></div>
