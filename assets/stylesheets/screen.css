@@ -55,6 +55,8 @@ section {
     font-size: 24px;
     text-align: center;
     display: none;
+    -webkit-transition: heigth 1s ease-in-out;
+    transition: height 1s ease-in-out;
 }
 
 @media screen and (min-width: 600px) {
@@ -87,6 +89,11 @@ section {
         /* when the keyboard is opened on mobile or when the device is really small */
         footer {
             opacity: 0;
+            display: none;
+        }
+
+        section {
+            height: 80vh;
         }
     }
 }
