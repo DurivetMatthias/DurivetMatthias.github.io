@@ -111,11 +111,11 @@ function showFlashcardSummary() {
                 div.innerHTML = katakana + '<br>' + romanji;
                 if (questionResults[i]) {
                     let amount = parseInt(correct.previousElementSibling.firstElementChild.innerHTML);
-                    correct.previousElementSibling.firstElementChild.innerHTML = amount + 1;
+                    correct.previousElementSibling.firstElementChild.innerHTML = (amount + 1).toString();
                     correct.appendChild(div);
                 } else {
                     let amount = parseInt(incorrect.previousElementSibling.firstElementChild.innerHTML);
-                    incorrect.previousElementSibling.firstElementChild.innerHTML = amount + 1;
+                    incorrect.previousElementSibling.firstElementChild.innerHTML = (amount + 1).toString();
                     incorrect.appendChild(div);
                 }
             }, 200 * i);
