@@ -26,7 +26,7 @@ function precache() {
             './assets/images/flower-original.png',
             './assets/images/home-transparant.png',
             './assets/images/origami.png',
-            './assets/manifest/manifest.JSON'
+            './assets/manifest/manifest'
         ]);
     });
 }
