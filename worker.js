@@ -15,17 +15,17 @@ function precache() {
         return cache.addAll([
             './index.html',
             './worker.js',
-            './stylesheets/screen.css',
-            './stylesheets/reset.css',
-            './javascripts/flashcard.js',
-            './javascripts/script.js',
-            './images/cogwheel-transparant.png',
-            './images/dragon.png',
-            './images/flower.png',
-            './images/flower2.png',
-            './images/flower-original.png',
-            './images/home-transparant.png',
-            './images/origami.png'
+            './assets/stylesheets/screen.css',
+            './assets/stylesheets/reset.css',
+            './assets/javascripts/flashcard.js',
+            './assets/javascripts/script.js',
+            './assets/images/cogwheel-transparant.png',
+            './assets/images/dragon.png',
+            './assets/images/flower.png',
+            './assets/images/flower2.png',
+            './assets/images/flower-original.png',
+            './assets/images/home-transparant.png',
+            './assets/images/origami.png'
         ]);
     });
 }
