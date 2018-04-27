@@ -8,6 +8,17 @@ const buttonToScreen = {'katakana': katakana, 'stats': stats, 'flashcard': flash
 
 document.addEventListener("DOMContentLoaded", function () {
 
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('assets/worker.js', {scope: 'assets/'})
+            .then(function (reg) {
+                // registration worked
+                console.log('Registration succeeded. Scope is ' + reg.scope);
+            }).catch(function (error) {
+            // registration failed
+            console.log('Registration failed with ' + error);
+        });
+    }
+
     VOCAB_OBJECT.ROMANJI.forEach(function (letter, i) {
         let div = document.createElement('div');
         div.classList.add('kana');
