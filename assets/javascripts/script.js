@@ -26,6 +26,8 @@ document.addEventListener("DOMContentLoaded", function () {
         katakana.appendChild(div);
     });
 
+    buildStatsSection();
+
     const allLi = document.getElementsByTagName('li');
     Array.from(allLi).forEach(li => li.addEventListener('click', function () {
         li.classList.add('buttonPush');

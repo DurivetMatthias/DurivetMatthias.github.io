@@ -80,6 +80,8 @@ function nextFlashcard() {
         showFlashcard();
     } else {
         showFlashcardSummary();
+        updateStatistics();
+        buildStatsSection();
     }
 }
 
