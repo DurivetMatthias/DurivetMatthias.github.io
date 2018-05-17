@@ -6,7 +6,7 @@ const settings = document.getElementById('settingsScreen');
 //const screens = [home, katakana, flashcard, stats, settings];
 const buttonToScreen = {'katakana': katakana, 'stats': stats, 'flashcard': flashcard};
 
-alert("v2");
+alert("v3");
 
 document.addEventListener("DOMContentLoaded", function () {
 
