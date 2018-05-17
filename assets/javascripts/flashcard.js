@@ -81,7 +81,6 @@ function nextFlashcard() {
     } else {
         showFlashcardSummary();
         updateStatistics();
-        buildStatsSection();
     }
 }
 
@@ -102,6 +101,8 @@ const summary = document.getElementById('summary');
 function showFlashcardSummary() {
     questions.style.display = 'none';
     summary.style.display = 'block';
+    correct.previousElementSibling.firstElementChild.innerHTML = "0";
+    incorrect.previousElementSibling.firstElementChild.innerHTML = "0";
     for (let i = 0; i < questionedKatakana.length; i++) {
         let div;
         let katakana = questionedKatakana[i];

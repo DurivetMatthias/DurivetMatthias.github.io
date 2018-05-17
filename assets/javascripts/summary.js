@@ -24,11 +24,12 @@ function updateStatistics() {
                 }
             }
         } else data = createFirstStatistics();
-        katakanaStorage.setItem(statistics, data).then(function () {
-            katakanaStorage.getItem(statistics).then(function (data) {
-                console.log(data);
-            });
-        });
+        katakanaStorage.setItem(statistics, data);
+    }).then(function () {
+        buildStatsSection();
+    }).catch(function (e) {
+        console.log("failed to update the statistics");
+        console.log(e);
     });
 }
 
@@ -55,6 +56,7 @@ function createFirstStatistics() {
 
 function buildStatsSection() {
     katakanaStorage.getItem(statistics).then(function (data) {
+        stats.innerHTML = "";
         if (data != null) {
             for (let i = 0; i < katakanaArray.length; i++) {
                 let romanji = romanjiArray[i];
@@ -64,13 +66,16 @@ function buildStatsSection() {
                 if (romanji !== '') {
                     let kObject = data[romanjiArray[i]];
                     let total = kObject.incorrect + kObject.correct;
-                    let percentage = kObject.correct * 100 / total;
-                    div.innerHTML = romanji + ": " + katakana + "<br/>" + kObject.correct + "/" + total + "<br/>" + percentage + "%";
+                    let percentage = Math.floor(kObject.correct * 100 / total);
+                    div.innerHTML = `${romanji}<br/>${katakana}<br/>${percentage}%`;
                 }
                 stats.appendChild(div);
             }
         } else {
             stats.appendChild("<h2>no statistics found</h2>");
         }
+    }).catch(function (e) {
+        console.log("failed get the statistics");
+        console.log(e);
     });
 }

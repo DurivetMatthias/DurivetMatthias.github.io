@@ -19,14 +19,14 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    buildStatsSection();
+
     VOCAB_OBJECT.ROMANJI.forEach(function (letter, i) {
         let div = document.createElement('div');
         div.classList.add('kana');
         if (letter !== '') div.innerHTML = letter + '<br>' + VOCAB_OBJECT.KATAKANA[i];
         katakana.appendChild(div);
     });
-
-    buildStatsSection();
 
     const allLi = document.getElementsByTagName('li');
     Array.from(allLi).forEach(li => li.addEventListener('click', function () {
