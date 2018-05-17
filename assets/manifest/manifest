@@ -4,7 +4,7 @@
   "background_color": "rgba(255,255,255,0)",
   "display": "standalone",
   "Scope": "/",
-  "start_url": "/",
+  "start_url": "/index.html",
   "icons": [
     {
       "src": "images/icons/icon-72x72.png",
