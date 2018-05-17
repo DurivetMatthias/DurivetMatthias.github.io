@@ -57,24 +57,23 @@ function createFirstStatistics() {
 function buildStatsSection() {
     katakanaStorage.getItem(statistics).then(function (data) {
         stats.innerHTML = "";
-        if (data != null) {
-            for (let i = 0; i < katakanaArray.length; i++) {
-                let romanji = romanjiArray[i];
-                let katakana = katakanaArray[i];
-                let div = document.createElement('div');
-                div.classList.add('kana');
-                if (romanji !== '') {
-                    let kObject = data[romanjiArray[i]];
-                    let total = kObject.incorrect + kObject.correct;
-                    let percentage = Math.floor(kObject.correct * 100 / total);
-                    div.innerHTML = `${romanji}<br/>${katakana}<br/>${percentage}%`;
-                }
-                stats.appendChild(div);
+        for (let i = 0; i < katakanaArray.length; i++) {
+            let romanji = romanjiArray[i];
+            let katakana = katakanaArray[i];
+            let div = document.createElement('div');
+            div.classList.add('kana');
+            if (romanji !== '') {
+                let kObject = data[romanjiArray[i]];
+                let total = kObject.incorrect + kObject.correct;
+                let percentage = Math.floor(kObject.correct * 100 / total);
+                div.innerHTML = `${romanji}<br/>${katakana}<br/>${percentage}%`;
             }
-        } else {
-            stats.appendChild("<h2>no statistics found</h2>");
+            stats.appendChild(div);
         }
     }).catch(function (e) {
+        let h2 = document.createElement('h2');
+        h2.innerText = "no statistics found";
+        stats.appendChild(h2);
         console.log("failed get the statistics");
         console.log(e);
     });
