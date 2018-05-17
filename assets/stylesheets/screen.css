@@ -57,6 +57,11 @@ section {
     display: none;
 }
 
+h2 {
+    margin-top: 10%;
+    font-size: 32px;
+}
+
 @media screen and (min-width: 600px) {
     /*pc or larger mobile devices */
     section {

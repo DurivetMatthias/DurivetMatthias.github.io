@@ -27,9 +27,8 @@ function updateStatistics() {
         katakanaStorage.setItem(statistics, data);
     }).then(function () {
         buildStatsSection();
-    }).catch(function (e) {
+    }).catch(function () {
         console.log("failed to update the statistics");
-        console.log(e);
     });
 }
 
@@ -70,11 +69,10 @@ function buildStatsSection() {
             }
             stats.appendChild(div);
         }
-    }).catch(function (e) {
+    }).catch(function () {
         let h2 = document.createElement('h2');
-        h2.innerText = "no statistics found";
+        h2.innerText = "no statistics found\n\n(◕︵◕)";
         stats.appendChild(h2);
         console.log("failed get the statistics");
-        console.log(e);
     });
 }

@@ -1,4 +1,4 @@
-var CACHE = 'v3';
+var CACHE = 'v4';
 
 self.addEventListener('install', function (evt) {
     //console.log('The service worker is being installed.');
@@ -15,10 +15,12 @@ function precache() {
         return cache.addAll([
             './index.html',
             './worker.js',
-            './assets/stylesheets/screen.css',
             './assets/stylesheets/reset.css',
+            './assets/stylesheets/screen.css',
             './assets/javascripts/flashcard.js',
             './assets/javascripts/script.js',
+            './assets/javascripts/localforage.min.js',
+            './assets/javascripts/summary.js',
             './assets/images/cogwheel-transparant.png',
             './assets/images/dragon.png',
             './assets/images/flower.png',
