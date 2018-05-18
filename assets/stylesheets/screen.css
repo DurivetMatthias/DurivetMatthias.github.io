@@ -64,10 +64,9 @@ h2 {
 
 input[type="color"] {
     display: block;
-    width: 71%;
+    width: 79%;
     border-radius: 20px;
     margin: 3vh auto;
-    -webkit-appearance: none;
     background-color: #000000;
     padding: 4vh;
 }
