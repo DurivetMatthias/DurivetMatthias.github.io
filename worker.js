@@ -1,4 +1,4 @@
-var CACHE = 'v10';
+var CACHE = 'v11';
 
 self.addEventListener('install', function (evt) {
     //console.log('The service worker is being installed.');
@@ -26,13 +26,23 @@ function precache() {
             './assets/images/flower.png',
             './assets/images/home-transparant.png',
             './assets/images/origami.png',
+            './assets/images/icons/icon-72x72.png',
+            './assets/images/icons/icon-96x96.png',
+            './assets/images/icons/icon-128x128.png',
+            './assets/images/icons/icon-144x144.png',
+            './assets/images/icons/icon-152x152.png',
+            './assets/images/icons/icon-192x192.png',
+            './assets/images/icons/icon-384x384.png',
+            './assets/images/icons/icon-512x512.png',
             './assets/manifest/manifest'
+
         ]);
     });
 }
 
 function fromCache(request) {
     return caches.open(CACHE).then(function (cache) {
+        console.log(request);
         return cache.match(request).then(function (matching) {
             return matching || Promise.reject('no-match');
         });
