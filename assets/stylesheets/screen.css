@@ -62,6 +62,24 @@ h2 {
     font-size: 32px;
 }
 
+input[type="color"] {
+    display: block;
+    width: 71%;
+    border-radius: 20px;
+    margin: 3vh auto;
+    -webkit-appearance: none;
+    background-color: #000000;
+    padding: 4vh;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border: none;
+}
+
 @media screen and (min-width: 600px) {
     /*pc or larger mobile devices */
     section {
@@ -150,13 +168,6 @@ h2 {
     display: none;
 }
 
-input[type = color] {
-    display: block;
-    width: 50%;
-    border-radius: 20px;
-    margin: 1vh auto;
-}
-
 ul {
     width: 100%;
     padding-top: 10vh;
@@ -172,7 +183,7 @@ li {
     background-color: #000000;
     color: var(--baseColor);
     border-radius: 20px;
-    margin: 5vh auto 5vh auto;
+    margin: 3vh auto 3vh auto;
 }
 
 #flashcardScreen {
