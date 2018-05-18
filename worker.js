@@ -1,20 +1,15 @@
-var CACHE = 'v20';
+var CACHE = 'v21';
 
 self.addEventListener('install', function (evt) {
-    //console.log('The service worker is being installed.');
     evt.waitUntil(precache());
 });
 
 self.addEventListener('fetch', function (evt) {
-    //console.log('The service worker is serving the asset.');
-
     if (evt.request.url.toLowerCase() === "https://durivetmatthias.github.io/") {
-        console.log(fromCache("index.html"));
-        //evt.respondWith(fromCache("index.html"))
+        evt.respondWith(fromCache("index.html"))
+    } else {
+        evt.respondWith(fromCache(evt.request));
     }
-    console.log(evt);
-    console.log(fromCache(evt.request));
-    evt.respondWith(fromCache(evt.request));
 });
 
 function precache() {
@@ -43,7 +38,6 @@ function precache() {
             './assets/images/icons/icon-384x384.png',
             './assets/images/icons/icon-512x512.png',
             './assets/manifest/manifest'
-
         ]);
     });
 }
