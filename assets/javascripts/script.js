@@ -6,35 +6,7 @@ const settings = document.getElementById('settingsScreen');
 //const screens = [home, katakana, flashcard, stats, settings];
 const buttonToScreen = {'katakana': katakana, 'stats': stats, 'flashcard': flashcard};
 
-alert("v8");
-
-let installPrompt;
-
-window.addEventListener('beforeinstallprompt', (e) => {
-    // Prevent Chrome 67 and earlier from automatically showing the prompt
-    //e.preventDefault();
-    console.log("beforeinstallprompt enevt triggered");
-    // Stash the event so it can be triggered later.
-    installPrompt = e;
-    installPrompt.prompt();
-});
-
-/*installPrompt.addEventListener('click', (e) => {
- // hide our user interface that shows our A2HS button
- installPrompt.style.display = 'none';
- // Show the prompt
- installPrompt.prompt();
- // Wait for the user to respond to the prompt
- installPrompt.userChoice
- .then((choiceResult) => {
- if (choiceResult.outcome === 'accepted') {
- console.log('User accepted the A2HS prompt');
- } else {
- console.log('User dismissed the A2HS prompt');
- }
- installPrompt = null;
- });
- });*/
+alert("v9");
 
 document.addEventListener("DOMContentLoaded", function () {
 
