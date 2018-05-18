@@ -5,6 +5,7 @@
   "background_color": "rgba(255,255,255,0)",
   "display": "standalone",
   "start_url": "/index.html",
+  "Source": "/",
   "icons": [
     {
       "src": "../../images/icons/icon-72x72.png",
