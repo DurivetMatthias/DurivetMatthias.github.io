@@ -1,4 +1,4 @@
-var CACHE = 'v18';
+var CACHE = 'v19';
 
 self.addEventListener('install', function (evt) {
     //console.log('The service worker is being installed.');
@@ -7,6 +7,13 @@ self.addEventListener('install', function (evt) {
 
 self.addEventListener('fetch', function (evt) {
     //console.log('The service worker is serving the asset.');
+
+    if (request.url.toLowerCase() === "https://durivetmatthias.github.io/") {
+        console.log(fromCache("index.html"));
+        evt.respondWith(fromCache("index.html"))
+    }
+    console.log(evt.request);
+    console.log(fromCache(evt.request));
     evt.respondWith(fromCache(evt.request));
 });
 
