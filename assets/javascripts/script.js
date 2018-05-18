@@ -12,7 +12,8 @@ let installPrompt;
 
 window.addEventListener('beforeinstallprompt', (e) => {
     // Prevent Chrome 67 and earlier from automatically showing the prompt
-    e.preventDefault();
+    //e.preventDefault();
+    console.log("beforeinstallprompt enevt triggered");
     // Stash the event so it can be triggered later.
     installPrompt = e;
     installPrompt.prompt();
