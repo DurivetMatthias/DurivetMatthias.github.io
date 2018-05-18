@@ -1,4 +1,4 @@
-var CACHE = 'v6';
+var CACHE = 'v7';
 
 self.addEventListener('install', function (evt) {
     //console.log('The service worker is being installed.');
