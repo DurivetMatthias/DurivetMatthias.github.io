@@ -1,4 +1,4 @@
-var CACHE = 'v22';
+var CACHE = 'v23';
 
 self.addEventListener('install', function (evt) {
     evt.waitUntil(precache());
@@ -6,7 +6,8 @@ self.addEventListener('install', function (evt) {
 
 self.addEventListener('fetch', function (evt) {
     if (evt.request.url.toLowerCase() === "https://durivetmatthias.github.io/") {
-        evt.request.url += "index.html;"
+        evt.request.url += "index.html";
+        console.log(evt);
     }
     evt.respondWith(fromCache(evt.request));
 });
