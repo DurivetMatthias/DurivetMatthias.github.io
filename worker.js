@@ -1,4 +1,4 @@
-var CACHE = 'v24';
+var CACHE = 'v25';
 
 self.addEventListener('install', function (evt) {
     evt.waitUntil(precache());
@@ -7,10 +7,14 @@ self.addEventListener('install', function (evt) {
 self.addEventListener('fetch', function (evt) {
     console.log(evt.request.url.toLowerCase());
     if (evt.request.url.toLowerCase() === "https://durivetmatthias.github.io/") {
-        evt.request.url += "index.html";
-        console.log(evt);
+        let evtclone = evt.clone();
+        evtclone.request.url = "https://durivetmatthias.github.io/index.html";
+        console.log(evtclone);
+        evt.respondWith(fromCache(evtclone.request));
+    } else {
+        evt.respondWith(fromCache(evt.request));
     }
-    evt.respondWith(fromCache(evt.request));
+
 });
 
 function precache() {
