@@ -1,4 +1,4 @@
-var CACHE = 'v19';
+var CACHE = 'v20';
 
 self.addEventListener('install', function (evt) {
     //console.log('The service worker is being installed.');
@@ -8,11 +8,11 @@ self.addEventListener('install', function (evt) {
 self.addEventListener('fetch', function (evt) {
     //console.log('The service worker is serving the asset.');
 
-    if (request.url.toLowerCase() === "https://durivetmatthias.github.io/") {
+    if (evt.request.url.toLowerCase() === "https://durivetmatthias.github.io/") {
         console.log(fromCache("index.html"));
-        evt.respondWith(fromCache("index.html"))
+        //evt.respondWith(fromCache("index.html"))
     }
-    console.log(evt.request);
+    console.log(evt);
     console.log(fromCache(evt.request));
     evt.respondWith(fromCache(evt.request));
 });
@@ -22,6 +22,7 @@ function precache() {
         return cache.addAll([
             './index.html',
             './worker.js',
+            './favicon.ico',
             './assets/stylesheets/reset.css',
             './assets/stylesheets/screen.css',
             './assets/javascripts/flashcard.js',
