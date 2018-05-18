@@ -5,11 +5,7 @@ self.addEventListener('install', function (evt) {
 });
 
 self.addEventListener('fetch', function (evt) {
-    console.log(evt.request.url);
     if (evt.request.url.toLowerCase() == "https://durivetmatthias.github.io/") {
-        let evtclone = evt;
-        evtclone.request.url = "https://durivetmatthias.github.io/index.html";
-        console.log(evtclone);
         evt.respondWith(fromCache("index.html"));
     } else {
         evt.respondWith(fromCache(evt.request));

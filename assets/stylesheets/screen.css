@@ -65,10 +65,17 @@ h2 {
 input[type="color"] {
     display: block;
     width: 71%;
-    border-radius: 20px;
     margin: 3vh auto;
+    border: 0;
     background-color: #000000;
-    padding: 4vh;
+}
+
+#colorWrapper {
+    border: solid #000000 1vh;
+    border-radius: 20px;
+    background-color: #000000;
+    width: 80%;
+    margin: 3vh auto auto;
 }
 
 input[type="color"]::-webkit-color-swatch-wrapper {
