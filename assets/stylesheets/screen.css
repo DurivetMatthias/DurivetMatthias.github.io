@@ -5,9 +5,25 @@
 }
 
 .life-counter{
-    height:100vh;
-    width: 100vw;
+    height: calc(100vh-1px);
+    width: calc(100vw-1px);
     flex-grow: 1;
-    background-color: rgba(176,224,230,.25);
+    background-color: rgba(176,224,230,.5);
     border: 1px solid black;
+    text-align: center;
+    -webkit-transition: -webkit-transform .8s ease-in-out;
+    -ms-transition: -ms-transform .8s ease-in-out;
+    transition: transform .8s ease-in-out; 
+}
+
+.life-counter > p {
+    text-align: center;
+    line-height: 80vh;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:30vh;
+    font-style:bold;
+}
+
+.life-counter > .rotate{
+    width: 50%;
 }
