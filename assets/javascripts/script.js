@@ -39,8 +39,8 @@ Vue.component("life-counter", {
                 <button class="rotate" v-on:click="rotation-=90">⭯</button>
             </div>
             <div class="edit-menu" v-show="isEdit">
-                <input v-model="cardName" v-on:keyup.enter="apply" v-on:keyup="updateAuto" list="cards">
-                <datalist id="cards">
+                <input v-model="cardName" v-on:keyup.enter="apply" v-on:keyup="updateAuto" v-bind:list="_uid + 'cards'">
+                <datalist v-bind:id="_uid + 'cards'">
                     <option v-for="card in autoCards" v-bind:value="card"></option>
                 </datalist>
                 <button v-on:click="apply">Apply</button>
