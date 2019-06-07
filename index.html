@@ -12,11 +12,8 @@
 
 <body>
     <section id="vue-app">
-        <div id="menu">
-            
-        </div>
-        <life-counter spin="+"></life-counter>
-        <life-counter spin="-"></life-counter>
+        <life-counter v-bind:init-rotation="180"></life-counter>
+        <life-counter v-bind:init-rotation="0"></life-counter>
     </section>
 
     <script src="worker.js"></script>

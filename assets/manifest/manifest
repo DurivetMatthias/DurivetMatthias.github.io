@@ -1,7 +1,8 @@
 {
   "name": "Life Counter for Magic: the Gathering",
   "short_name": "Life Counter",
-  "display": "landscape",
+  "display": "fullscreen",
+  "orientation": "portrait",
   "start_url": "../../index.html",
   "Scope": "/",
   "icons": [
