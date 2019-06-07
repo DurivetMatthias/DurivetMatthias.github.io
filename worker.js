@@ -15,22 +15,22 @@ self.addEventListener("fetch", function (evt) {
 async function precache() {
   const cache = await caches.open(CACHE);
   return cache.addAll([
-    // "./index.html",
-    // "./worker.js",
-    // "./favicon.ico",
-    // "./assets/stylesheets/reset.css",
-    // "./assets/stylesheets/screen.css",
-    // "./assets/javascripts/flashcard.js",
-    // "./assets/javascripts/script.js",
-    // "./assets/javascripts/localforage.min.js",
-    // "./assets/images/icons/icon-36.png",
-    // "./assets/images/icons/icon-48.png",
-    // "./assets/images/icons/icon-72.png",
-    // "./assets/images/icons/icon-96.png",
-    // "./assets/images/icons/icon-144.png",
-    // "./assets/images/icons/icon-192.png",
-    // "./assets/images/icons/icon-512.png",
-    // "./assets/manifest/manifest"
+    "./index.html",
+    "./worker.js",
+    "./favicon.ico",
+    "./assets/stylesheets/reset.css",
+    "./assets/stylesheets/screen.css",
+    "./assets/javascripts/flashcard.js",
+    "./assets/javascripts/script.js",
+    "./assets/javascripts/localforage.min.js",
+    "./assets/images/icons/icon-36.png",
+    "./assets/images/icons/icon-48.png",
+    "./assets/images/icons/icon-72.png",
+    "./assets/images/icons/icon-96.png",
+    "./assets/images/icons/icon-144.png",
+    "./assets/images/icons/icon-192.png",
+    "./assets/images/icons/icon-512.png",
+    "./assets/manifest/manifest"
   ]);
 }
 
