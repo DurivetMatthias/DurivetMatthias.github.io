@@ -1,4 +1,5 @@
 Vue.component('life-counter', {
+    props: ['spin'],
     data: function () {
         return {
             count: 20,
@@ -8,12 +9,11 @@ Vue.component('life-counter', {
     },
     computed:{
         computedStyle () {
-            return 'transform: rotate(' + this.rotation + 'deg); backgroundImage: url(' + this.image + ')'
+            return 'transform: rotate(' + this.spin + this.rotation + 'deg); backgroundImage: url(' + this.image + ')'
         }
     },
     template: `
         <div class='life-counter' :style=computedStyle>
-            {{computedStyle}}
             <button class='add' v-on:click='count++'>+</button>
             <input type=text v-on:keyup.enter=changeImage></input>
             <button class='sub' v-on:click='count--'>-</button>
