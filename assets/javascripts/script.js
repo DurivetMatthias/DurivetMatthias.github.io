@@ -5,7 +5,9 @@ Vue.component("life-counter", {
             count: 20,
             image: "",
             rotation: this.initRotation,
-            isEdit: false
+            isEdit: false,
+            cardName: "",
+            autoCards: ["island", "swamp", "mountain", "forest", "plains"],
         }
     },
     computed:{
@@ -13,7 +15,11 @@ Vue.component("life-counter", {
             let rotateStyle;
             let backgroundStyle = "backgroundImage: url(" + this.image + ")";
             if(this.isEdit){
-                rotateStyle = "transform: rotate(" + 0 + "deg)"
+                if(this.rotation%360 > 180){
+                    rotateStyle = "transform: rotate(" + 360 + "deg)"
+                }else{
+                    rotateStyle = "transform: rotate(" + 0 + "deg)"
+                }
             }else{
                 rotateStyle = "transform: rotate(" + this.rotation + "deg)"
             }
@@ -33,20 +39,38 @@ Vue.component("life-counter", {
                 <button class="rotate" v-on:click="rotation-=90">⭯</button>
             </div>
             <div class="edit-menu" v-show="isEdit">
-                <button class="apply" v-on:click="isEdit=false">Apply</button>
+                <input v-model="cardName" v-on:keyup.enter="apply" v-on:keyup="updateAuto" list="cards">
+                <datalist id="cards">
+                    <option v-for="card in autoCards" v-bind:value="card"></option>
+                </datalist>
+                <button v-on:click="apply">Apply</button>
             </div>
         </div>
     `,
     methods: {
-        changeImage: (event) => {
-            let search = event.srcElement.value;
-            let searchUrl = "https://api.scryfall.com/cards/named?fuzzy="+search
+        changeImage: function(cardName) {
+            let searchUrl = "https://api.scryfall.com/cards/named?fuzzy="+cardName
             fetch(searchUrl)
                 .then(response => {
                     return response.json();
                 })
                 .then(cardJson => {
                     this.image = cardJson.image_uris.art_crop
+                }).catch(error => console.log(error));
+        },
+        apply: function() {
+            this.isEdit = false;
+            this.changeImage(this.cardName)
+        },
+        updateAuto: function(event) {
+            let query = event.srcElement.value;
+            let searchUrl = "https://api.scryfall.com/cards/autocomplete?q="+query;
+            fetch(searchUrl)
+                .then(response => {
+                    return response.json();
+                })
+                .then(cardJson => {
+                    this.autoCards = cardJson.data;
                 }).catch(error => console.log(error));
         }
     }

@@ -91,12 +91,25 @@
     left: 50%;
     transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
 }
 
-.edit-menu > .apply {
+.edit-menu > button {
     height: calc(var(--leftover-size)*0.5);
     width: 33%;
     font-size: calc(var(--leftover-size)*0.25);
+}
+
+.edit-menu > input {
+    height: calc(var(--leftover-size)*0.5);
+    width: 75%;
+    font-size: calc(var(--leftover-size)*0.25);
+    background-color: black;
+    color: white;
+    text-align: center;
 }
 
 body {
