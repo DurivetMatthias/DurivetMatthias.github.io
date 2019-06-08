@@ -3,36 +3,65 @@
     --display-size: 30vh;
     --leftover-size: calc(var(--counter-size) - var(--display-size));
     --border-radius: 25px;
+    --opacity: 0.4;
 }
 
 #vue-app {
     display: flex;
-    height: 100vh;
-    width: 100vw;
-    flex-direction: column;
+    height: calc(var(--counter-size) * 2);
+    width: var(--counter-size);
+    margin: 7.5vh auto 2.5vh auto;
+    flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-evenly;
-    align-content: space-around
+    align-content: space-around;
 }
 
 .life-counter{
     height: var(--counter-size);
     width: var(--counter-size);
     background-color: yellow;
+    display: inline-block;
     text-align: center;
     background-size: cover;
     background-position: center center;
     border-radius: var(--border-radius);
     -webkit-transition: -webkit-transform .8s ease-in-out;
     -ms-transition: -ms-transform .8s ease-in-out;
-    transition: transform .8s ease-in-out; 
+    transition: transform .8s ease-in-out;
+
+    --base-color: 0;
+    --main-color: rgb(var(--base-color),var(--base-color),var(--base-color));
+    --opaque-main-color: rgba(var(--base-color),var(--base-color),var(--base-color), var(--opacity));
+    --base-contrast: calc(255 - var(--base-color));
+    --contrast-color: rgb(var(--base-contrast),var(--base-contrast),var(--base-contrast));
+    --opaque-contrast-color: rgba(var(--base-contrast),var(--base-contrast),var(--base-contrast), var(--opacity));
+
 }
 
-.life-counter button {
-    background-color: black;
-    border: none;
+#vue-app > .addCounter, #vue-app > .removeCounter {
+    height: 5vh;
+    width: 33vw;
     color: white;
+    font-size: 30px;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+}
+
+.removeCounter{
+    left: 0;
+}
+
+.addCounter{
+    right: 0;
+}
+
+button {
+    background-color: var(--main-color);
+    border: none;
+    color: var(--contrast-color);
 }
 
 .display {
@@ -46,9 +75,11 @@
     justify-content: space-around;
 }
 
-.display > p {
-    line-height: var(--display-size);
-    display: inline-block;
+.display > .contrasted  {
+    border: 5px solid var(--main-color);
+    border-radius: var(--border-radius);
+    padding: 5px;
+    background-color: var(--opaque-contrast-color);
 }
 
 .display > .count {
@@ -81,10 +112,10 @@
 }
 
 .edit-menu {
-    height: calc( var(--counter-size) - 2vh);
-    width: calc( var(--counter-size) - 2vh);
+    height: calc( var(--counter-size));
+    width: calc( var(--counter-size));
     border-radius: var(--border-radius);
-    background-color: white;
+    background-color: var(--contrast-color);
     opacity: 0.95;
     position: absolute;
     top: 50%;
@@ -107,11 +138,11 @@
     height: calc(var(--leftover-size)*0.5);
     width: 75%;
     font-size: calc(var(--leftover-size)*0.25);
-    background-color: black;
-    color: white;
+    background-color: var(--main-color);
+    color: var(--contrast-color);
     text-align: center;
 }
 
 body {
-    background-color: black
+    background-color: black;
 }

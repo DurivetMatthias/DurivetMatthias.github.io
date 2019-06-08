@@ -13,24 +13,36 @@ Vue.component("life-counter", {
     computed:{
         computedStyle () {
             let rotateStyle;
-            let backgroundStyle = "backgroundImage: url(" + this.image + ")";
             if(this.isEdit){
                 if(this.rotation%360 > 180){
-                    rotateStyle = "transform: rotate(" + 360 + "deg)"
+                    let closestUpright = this.rotation + 360 - this.rotation%360
+                    rotateStyle = "rotate(" + closestUpright + "deg)"
                 }else{
-                    rotateStyle = "transform: rotate(" + 0 + "deg)"
+                    let closestUpright = this.rotation - this.rotation%360
+                    rotateStyle = "rotate(" + closestUpright + "deg)"
                 }
             }else{
-                rotateStyle = "transform: rotate(" + this.rotation + "deg)"
+                rotateStyle = "rotate(" + this.rotation + "deg)"
             }
-            return rotateStyle + ";" + backgroundStyle;
+            let scaleStyle;
+            let widthStyle;
+            if(this == this.$root.activeCounter){
+                scaleStyle = "scale(0.95)";
+            } else{
+                let scale = 0.95 / (this.$root.counters.length - 1);
+                scaleStyle = "scale(" + scale + ")";
+            }
+
+            let backgroundStyle = "backgroundImage: url(" + this.image + ")";
+            let transformStyle = "transform: " + rotateStyle + " " + scaleStyle;
+            return backgroundStyle + ";" + transformStyle;
         }
     },
     template: `
-        <div class="life-counter" :style=computedStyle>
+        <div class="life-counter" :style=computedStyle v-on:click="setActive">
             <div class="display">
                 <button class="count" v-on:click="count--"><</button>
-                <p>{{ count }}</p>
+                <p v-bind:class="{ contrasted: image!='' }">{{ count }}</p>
                 <button class="count" v-on:click="count++">></button>
             </div>
             <div class="rotation">
@@ -72,8 +84,50 @@ Vue.component("life-counter", {
                 .then(cardJson => {
                     this.autoCards = cardJson.data;
                 }).catch(error => console.log(error));
+        },
+        invertTheme: function(){
+            let inverted = 255 - this.$el.style.getPropertyValue("--base-color");
+            this.$el.style.setProperty('--base-color', inverted);
+        },
+        setActive: function () {
+            this.$root.activeCounter = this;
         }
     }
 })
 
-new Vue({ el: "#vue-app" })
+class CounterObject {
+    constructor(initRotation) {
+        this.initRotation = initRotation;
+    }
+}
+
+let main = new Vue({ 
+    el: "#vue-app",
+    data: {
+        counters: [
+            new CounterObject(0),
+            new CounterObject(180),
+        ],
+        activeCounter: null,
+    },
+    methods: {
+        addCounter: function() {
+            if(this.counters.length<4){
+                this.counters.push(new CounterObject(0));
+            } else {
+                alert("Can't have more than 4")
+            }
+            
+        },
+        removeCounter: function() {
+            if(this.counters.length>1){
+                this.counters.pop();
+            } else {
+                alert("Can't have less than 1")
+            }
+        }
+    },
+    mounted: function(){
+        this.activeCounter = this.$children[0];
+    }
+})

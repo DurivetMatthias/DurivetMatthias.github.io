@@ -12,8 +12,9 @@
 
 <body>
     <section id="vue-app">
-        <life-counter v-bind:init-rotation="180"></life-counter>
-        <life-counter v-bind:init-rotation="0"></life-counter>
+        <button v-on:click="removeCounter" class="removeCounter">-</button>
+        <button v-on:click="addCounter" class="addCounter">+</button>
+        <life-counter v-for="counter in counters" v-bind:init-rotation="counter.initRotation"></life-counter>
     </section>
 
     <script src="worker.js"></script>
