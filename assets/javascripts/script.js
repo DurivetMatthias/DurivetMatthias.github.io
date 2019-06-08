@@ -14,13 +14,24 @@ Vue.component("life-counter", {
         computedStyle () {
             let rotateStyle;
             if(this.isEdit){
-                if(this.rotation%360 > 180){
-                    let closestUpright = this.rotation + 360 - this.rotation%360
-                    rotateStyle = "rotate(" + closestUpright + "deg)"
+                if(this.rotation>0){
+                    if(this.rotation%360 > 180){
+                        let closestUpright = this.rotation + 360 - this.rotation%360
+                        rotateStyle = "rotate(" + closestUpright + "deg)"
+                    }else{
+                        let closestUpright = this.rotation - this.rotation%360
+                        rotateStyle = "rotate(" + closestUpright + "deg)"
+                    }
                 }else{
-                    let closestUpright = this.rotation - this.rotation%360
-                    rotateStyle = "rotate(" + closestUpright + "deg)"
+                    if(Math.abs(this.rotation%360) > 180){
+                        let closestUpright = this.rotation - 360 - this.rotation%360
+                        rotateStyle = "rotate(" + closestUpright + "deg)"
+                    }else{
+                        let closestUpright = this.rotation - this.rotation%360
+                        rotateStyle = "rotate(" + closestUpright + "deg)"
+                    }
                 }
+                
             }else{
                 rotateStyle = "rotate(" + this.rotation + "deg)"
             }
@@ -46,9 +57,9 @@ Vue.component("life-counter", {
                 <button class="count" v-on:click="count++">></button>
             </div>
             <div class="rotation">
-                <button class="rotate" v-on:click="rotation+=90">⭮</button>
+                <button class="rotate" v-on:click="rotation+=90">&#x21BB</button>
                 <button class="edit" v-on:click="isEdit = !isEdit">✎</button>
-                <button class="rotate" v-on:click="rotation-=90">⭯</button>
+                <button class="rotate" v-on:click="rotation-=90">&#x21BA</button>
             </div>
             <div class="edit-menu" v-show="isEdit">
                 <input v-model="cardName" v-on:keyup.enter="apply" v-on:keyup="updateAuto" v-bind:list="_uid + 'cards'">
@@ -105,17 +116,17 @@ let main = new Vue({
     el: "#vue-app",
     data: {
         counters: [
-            new CounterObject(0),
             new CounterObject(180),
+            new CounterObject(0),
         ],
         activeCounter: null,
     },
     methods: {
         addCounter: function() {
-            if(this.counters.length<4){
+            if(this.counters.length<2){
                 this.counters.push(new CounterObject(0));
             } else {
-                alert("Can't have more than 4")
+                alert("Can't have more than 2")
             }
             
         },
