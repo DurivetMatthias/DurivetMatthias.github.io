@@ -1,7 +1,7 @@
 {
   "name": "Life Counter",
   "short_name": "Life Counter",
-  "display": "standalone",
+  "display": "fullscreen",
   "orientation": "landscape",
   "start_url": "../../index.html",
   "scope": "/",
