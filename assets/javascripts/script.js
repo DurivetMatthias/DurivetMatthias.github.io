@@ -1,16 +1,18 @@
 Vue.component("life-counter", {
-    props: ["initRotation"],
+    props: ["initRotation", "initCount"],
     data: function () {
         return {
-            count: 20,
+            count: this.initCount,
             image: "",
-            rotation: this.initRotation,
             isEdit: false,
             cardName: "",
             autoCards: ["island", "swamp", "mountain", "forest", "plains"],
         }
     },
     computed:{
+        rotation () {
+            return this.initRotation;
+        },
         computedStyle () {
             let rotateStyle;
             if(this.isEdit){
@@ -35,31 +37,35 @@ Vue.component("life-counter", {
             }else{
                 rotateStyle = "rotate(" + this.rotation + "deg)"
             }
-            let scaleStyle;
-            let widthStyle;
-            if(this == this.$root.activeCounter){
-                scaleStyle = "scale(0.95)";
-            } else{
-                let scale = 0.95 / (this.$root.counters.length - 1);
-                scaleStyle = "scale(" + scale + ")";
-            }
 
             let backgroundStyle = "backgroundImage: url(" + this.image + ")";
-            let transformStyle = "transform: " + rotateStyle + " " + scaleStyle;
+
+            // let sizeStyle;
+            // if(this.rotation % 180 == 0){
+            //     sizeStyle = `
+            //     --counter-width: 40vw;
+            //     --counter-height: 45vh;`
+            // }else{
+            //     sizeStyle = `
+            //     --counter-width: 40vh;
+            //     --counter-height: 45vw;`
+            // }
+
+            let transformStyle = "transform: " + rotateStyle;
             return backgroundStyle + ";" + transformStyle;
         }
     },
     template: `
         <div class="life-counter" :style=computedStyle v-on:click="setActive">
             <div class="display">
-                <button class="count" v-on:click="count--"><</button>
+                <button class="count" v-on:click="count--">-</button>
                 <p v-bind:class="{ contrasted: image!='' }">{{ count }}</p>
-                <button class="count" v-on:click="count++">></button>
+                <button class="count" v-on:click="count++">+</button>
             </div>
             <div class="rotation">
-                <button class="rotate" v-on:click="rotation+=90">&#x21BB</button>
+                <!--<button class="rotate" v-on:click="rotation+=90">&#x21BB</button>
                 <button class="edit" v-on:click="isEdit = !isEdit">✎</button>
-                <button class="rotate" v-on:click="rotation-=90">&#x21BA</button>
+                <button class="rotate" v-on:click="rotation-=90">&#x21BA</button>-->
             </div>
             <div class="edit-menu" v-show="isEdit">
                 <input v-model="cardName" v-on:keyup.enter="apply" v-on:keyup="updateAuto" v-bind:list="_uid + 'cards'">
@@ -107,38 +113,72 @@ Vue.component("life-counter", {
 })
 
 class CounterObject {
-    constructor(initRotation) {
+    constructor(initRotation, initCount) {
         this.initRotation = initRotation;
+        this.initCount = initCount;
+
+        this.flip = function(){
+            if(this.initRotation == 0) this.initRotation = 180;
+            else if(this.initRotation == 180) this.initRotation = 0;
+        }
     }
 }
 
 let main = new Vue({ 
     el: "#vue-app",
     data: {
-        counters: [
-            new CounterObject(180),
-            new CounterObject(0),
-        ],
-        activeCounter: null,
+        counters: [],
+        menuVisible: false,
+        defaultDelay: 500,
+        defaultMenuRatio: "0.05"
     },
     methods: {
-        addCounter: function() {
-            if(this.counters.length<2){
-                this.counters.push(new CounterObject(0));
-            } else {
-                alert("Can't have more than 2")
+        addCounter: function(startAmount) {
+            this.hideMenu();
+            this.counters.push(new CounterObject(0, startAmount));
+            if(this.counters.length==3){
+                this.counters[0].flip();
+                this.counters[1].flip();
             }
-            
         },
         removeCounter: function() {
-            if(this.counters.length>1){
-                this.counters.pop();
-            } else {
-                alert("Can't have less than 1")
+            this.hideMenu();
+            this.counters.pop();
+            if(this.counters.length==2){
+                this.counters[0].flip();
+                this.counters[1].flip();
+            }
+        },
+        removeAllCounters: function() {
+            let outsideThis = this;
+            let removeAmount = outsideThis.counters.length;
+            for(let i=0;i<removeAmount;i++){
+                setTimeout(function(){
+                    outsideThis.removeCounter();
+                }, i*outsideThis.defaultDelay);
+            }
+            return removeAmount*outsideThis.defaultDelay;
+        },
+        toggleMenu: function() {
+            this.menuVisible = !this.menuVisible;
+            if(this.menuVisible) document.documentElement.style.setProperty("--menu-ratio", "1");
+            else document.documentElement.style.setProperty("--menu-ratio", this.defaultMenuRatio);
+        },
+        hideMenu: function() {
+            this.menuVisible = false;
+            document.documentElement.style.setProperty("--menu-ratio", this.defaultMenuRatio);
+        },
+        resetCounters: function(playerAmount, startAmount){
+            let outsideThis = this;
+            let delay = outsideThis.removeAllCounters();
+            for(let i=0;i<playerAmount;i++){
+                setTimeout(function(){
+                    outsideThis.addCounter(startAmount);
+                }, delay + i*outsideThis.defaultDelay);
             }
         }
     },
     mounted: function(){
-        this.activeCounter = this.$children[0];
+        this.resetCounters(4, 40);
     }
 })

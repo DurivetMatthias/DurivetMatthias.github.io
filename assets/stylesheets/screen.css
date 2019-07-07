@@ -1,16 +1,62 @@
 :root {
-    --counter-size: 45vh;
-    --display-size: 30vh;
-    --leftover-size: calc(var(--counter-size) - var(--display-size));
+    --menu-ratio: 0.05;
+    --menu-width: calc(100vw * (var(--menu-ratio) - 0.01));
+    --content-width: calc(100vw * (1 - var(--menu-ratio)));
+
+    --counter-width: calc(100vw * ((1 - var(--menu-ratio)) / 2 - 3*0.01));
+    --counter-height: 45vh;
+    --display-height: 100%;
+    --leftover-height: 0;
+    --restricting-size: 25vw;
     --border-radius: 25px;
     --opacity: 0.4;
 }
 
-#vue-app {
+body {
+    background-color: black;
+}
+
+#menu {
+    width: var(--menu-width);
+    display: inline-block;
+    vertical-align: top;
+    transition: width .5s ease-in-out,
+}
+
+#hamburger {
+    color: white;
+    height: 10vh;
+    width: var(--menu-width);
+    font-size: 4vw;
+    line-height: 10vh;
+    text-align: center;
+    padding: 0;
+    display: block;
+    border: 1px solid white;
+}
+
+#slidingMenu {
+    color: white;
+    width: 100%;
     display: flex;
-    height: calc(var(--counter-size) * 2);
-    width: var(--counter-size);
-    margin: 7.5vh auto 2.5vh auto;
+    flex-flow: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#slidingMenu > button {
+    display: block;
+    text-align: center;
+    height: 10vh;
+    width: 100%;
+    border: 1px solid white;
+}
+
+#counters {
+    height: 100vh;
+    width: var(--content-width);
+    display: inline-flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
@@ -19,17 +65,13 @@
 }
 
 .life-counter{
-    height: var(--counter-size);
-    width: var(--counter-size);
+    height: var(--counter-height);
+    width: var(--counter-width);
     background-color: yellow;
-    display: inline-block;
-    text-align: center;
     background-size: cover;
     background-position: center center;
     border-radius: var(--border-radius);
-    -webkit-transition: -webkit-transform .8s ease-in-out;
-    -ms-transition: -ms-transform .8s ease-in-out;
-    transition: transform .8s ease-in-out;
+    transition: transform .5s ease-in-out, width .5s ease-in-out, height .5s ease-in-out;
 
     --base-color: 0;
     --main-color: rgb(var(--base-color),var(--base-color),var(--base-color));
@@ -40,36 +82,26 @@
 
 }
 
-#vue-app > .addCounter, #vue-app > .removeCounter {
-    height: 5vh;
-    width: 33vw;
+#menu .addCounter, #menu .removeCounter {
+    height: 100%;
+    width: 49vw;
     color: white;
-    font-size: 30px;
     display: inline-block;
-    position: absolute;
-    top: 0;
-}
-
-.removeCounter{
-    left: 0;
-}
-
-.addCounter{
-    right: 0;
 }
 
 button {
     background-color: var(--main-color);
     border: none;
     color: var(--contrast-color);
+    padding: 0;
 }
 
 .display {
     display: flex;
-    height: var(--display-size);
-    width: var(--counter-size);
+    height: var(--display-height);
+    width: var(--counter-width);
     font-family: Arial, Helvetica, sans-serif;
-    font-size: calc(var(--display-size) * 2 / 3);
+    font-size: calc(var(--restricting-size)*0.25);
     font-weight: bold;
     align-items: center;
     justify-content: space-around;
@@ -83,28 +115,28 @@ button {
 }
 
 .display > .count {
-    height: calc(var(--display-size)*0.5);
-    width: calc(var(--display-size)*0.25);
-    font-size: calc(var(--display-size)*0.25);
+    height: calc(var(--restricting-size)*0.5);
+    width: calc(var(--restricting-size)*0.25);
+    font-size: calc(var(--restricting-size)*0.25);
 }
 
 .rotation {
     display: flex;
-    height: var(--leftover-size);
+    height: var(--leftover-height);
     align-items: center;
     justify-content: space-evenly;
 }
 
 .rotation > .rotate {
-    height: calc(var(--leftover-size)*0.5);
+    height: calc(var(--leftover-height)*0.5);
     width: 25%;
-    font-size: calc(var(--leftover-size)*0.25);
+    font-size: calc(var(--leftover-height)*0.25);
 }
 
 .rotation > .edit{
-    height: calc(var(--leftover-size)*0.5);
+    height: calc(var(--leftover-height)*0.5);
     width: 33%;
-    font-size: calc(var(--leftover-size)*0.25);
+    font-size: calc(var(--leftover-height)*0.25);
     -webkit-transform:rotateY(180deg);
     -moz-transform:rotateY(180deg);
     -o-transform:rotateY(180deg);
@@ -129,20 +161,16 @@ button {
 }
 
 .edit-menu > button {
-    height: calc(var(--leftover-size)*0.5);
+    height: calc(var(--leftover-height)*0.5);
     width: 33%;
-    font-size: calc(var(--leftover-size)*0.25);
+    font-size: calc(var(--leftover-height)*0.25);
 }
 
 .edit-menu > input {
-    height: calc(var(--leftover-size)*0.5);
+    height: calc(var(--leftover-height)*0.5);
     width: 75%;
-    font-size: calc(var(--leftover-size)*0.25);
+    font-size: calc(var(--leftover-height)*0.25);
     background-color: var(--main-color);
     color: var(--contrast-color);
     text-align: center;
-}
-
-body {
-    background-color: black;
 }
