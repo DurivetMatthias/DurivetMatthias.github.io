@@ -6,7 +6,7 @@ Vue.component("life-counter", {
             image: "",
             isEdit: false,
             cardName: "",
-            autoCards: ["island", "swamp", "mountain", "forest", "plains"],
+            autoCards: ["island", "swamp", "mountain", "forest", "plains"]
         }
     },
     computed:{
@@ -59,12 +59,12 @@ Vue.component("life-counter", {
         <div class="life-counter" :style=computedStyle v-on:click="setActive">
             <div class="display">
                 <button class="count" v-on:click="count--">-</button>
-                <p v-bind:class="{ contrasted: image!='' }">{{ count }}</p>
+                <p v-bind:class="{ contrasted: image!='' }" v-on:click="toggleEdit">{{ count }}</p>
                 <button class="count" v-on:click="count++">+</button>
             </div>
             <div class="rotation">
                 <!--<button class="rotate" v-on:click="rotation+=90">&#x21BB</button>
-                <button class="edit" v-on:click="isEdit = !isEdit">✎</button>
+                <button class="edit" v-on:click="toggleEdit">✎</button>
                 <button class="rotate" v-on:click="rotation-=90">&#x21BA</button>-->
             </div>
             <div class="edit-menu" v-show="isEdit">
@@ -77,6 +77,9 @@ Vue.component("life-counter", {
         </div>
     `,
     methods: {
+        toggleEdit: function() {
+            this.isEdit = !this.isEdit;
+        },
         changeImage: function(cardName) {
             let searchUrl = "https://api.scryfall.com/cards/named?fuzzy="+cardName
             fetch(searchUrl)
@@ -109,6 +112,9 @@ Vue.component("life-counter", {
         setActive: function () {
             this.$root.activeCounter = this;
         }
+    },
+    created: function(){
+        
     }
 })
 
