@@ -1,0 +1,17 @@
+#img {
+    transform: scale(0.4);
+    position: absolute;
+    top: -300px;
+    left: -1036px;
+}
+
+.ocrText{
+    display: inline;
+    font-size: 500%;
+}
+
+button, input{
+    height: 600px;
+    width: 600px;
+    font-size: 200px;
+}

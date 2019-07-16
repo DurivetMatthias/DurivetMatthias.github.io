@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Life Counter</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <link rel="stylesheet" href="assets/stylesheets/reset.css" type="text/css" />
+    <link rel="stylesheet" href="assets/stylesheets/screen.css" type="text/css" />
+</head>
+
+<body>
+    <section id="vue-app">
+        <section id=menu>
+            <button id=hamburger v-on:click="toggleMenu">&#9776;</button>
+            <div v-if=menuVisible id=slidingMenu>
+                <button v-on:click="resetCounters(4, 40)">Commander</button>
+                <button v-on:click="resetCounters(4, 20)">Oathbraker</button>
+                <button v-on:click="resetCounters(2, 20)">Constructed</button>
+                <button v-on:click="removeCounter">Remove</button>
+                <button v-on:click="addCounter(20)">Add (20)</button>
+                <button v-on:click="addCounter(40)">Add (40)</button>
+            </div>
+        </section>
+        <section v-if=!menuVisible id=counters>
+            <life-counter v-for="counter in counters" v-bind:init-rotation="counter.initRotation"
+                v-bind:init-count="counter.initCount">
+            </life-counter>
+        </section>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="assets/javascripts/script.js"></script>
+</body>
+
+</html>

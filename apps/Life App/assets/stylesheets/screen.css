@@ -1,0 +1,159 @@
+/* Always active CSS */
+:root {
+}
+
+body {
+  background-color: black;
+}
+
+button {
+  background-color: black;
+  border: none;
+  color: white;
+}
+
+#menu {
+  transition: width 0.5s ease-in-out;
+}
+
+#counters {
+  display: flex;
+}
+
+#hamburger {
+  height: var(--menu-height);
+  width: calc(100vw - 2px);
+  color: white;
+  font-size: calc(var(--menu-height) * 0.7);
+  line-height: var(--menu-height);
+  text-align: center;
+  border: 1px solid white;
+}
+
+#slidingMenu {
+  color: white;
+  display: flex;
+  flex-flow: column;
+  flex-wrap: nowrap;
+}
+
+#slidingMenu > button {
+  height: var(--menu-height);
+  width: 100%;
+  display: block;
+  text-align: center;
+  border: 1px solid white;
+}
+
+/* Orientation based CSS */
+@media (orientation: landscape) {
+  :root {
+    --menu-ratio: 0.14;
+    --counter-width: 35vw;
+    --counter-height: 35vh;
+    --menu-height: calc(100vh * var(--menu-ratio));
+    --content-height: calc(100vh - var(--menu-height));
+  }
+}
+
+/* Orientation based CSS */
+@media (orientation: portrait) {
+  :root {
+    --menu-ratio: 0.08;
+    --counter-width: 35vh;
+    --counter-height: 35vh;
+    --menu-height: calc(100vh * var(--menu-ratio));
+    --content-height: calc(100vh - var(--menu-height));
+  }
+
+  #menu {
+    height: var(--menu-height);
+    width: 100vw;
+  }
+
+  #counters {
+    height: var(--content-height);
+    flex-flow: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .display {
+    --number-height: calc(var(--counter-height) / 3);
+  }
+}
+
+.life-counter {
+  height: var(--counter-height);
+  width: var(--counter-width);
+  background-color: yellow;
+  background-size: cover;
+  background-position: center;
+  border-radius: 20px;
+  transition: transform 0.5s linear, width 0.5s linear, height 0.5s linear;
+}
+
+button:focus {
+  outline: 0;
+}
+
+.display {
+  display: flex;
+  height: var(--counter-height);
+  width: var(--counter-width);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 32px;
+  font-weight: bold;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.display > .contrasted {
+  height: var(--number-height);
+  width: var(--number-height);
+  line-height: var(--number-height);
+  text-align: center;
+  border-radius: 10px;
+  background-color: white;
+  opacity: 0.6;
+}
+
+.display > .count {
+  font-size: 24px;
+  height: var(--number-height);
+  width: calc(var(--number-height) / 2);
+  border-radius: 10px;
+}
+
+.edit-menu {
+  height: 100%;
+  width: 100%;
+  border-radius: 25px;
+  background-color: yellow;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+}
+
+.edit-menu > input {
+  height: 25%;
+  width: 75%;
+  font-size: medium;
+  background-color: black;
+  color: white;
+  text-align: center;
+  position: relative;
+}
+
+.edit-menu > button {
+  height: 25%;
+  width: 33%;
+  position: relative;
+}

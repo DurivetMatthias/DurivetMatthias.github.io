@@ -11,26 +11,24 @@
 </head>
 
 <body>
-    <section id="vue-app">
-        <section id=menu>
-            <div id=hamburger v-on:click="toggleMenu">&#9776;</div>
-            <div v-if=menuVisible id=slidingMenu>
-                <button v-on:click="resetCounters(4, 40)">Commander</button>
-                <button v-on:click="resetCounters(4, 20)">Oathbraker</button>
-                <button v-on:click="resetCounters(2, 20)">Constructed</button>
-                <button v-on:click="removeCounter">Remove</button>
-                <button v-on:click="addCounter(20)">Add (20)</button>
-                <button v-on:click="addCounter(40)">Add (40)</button>
+    <div id="vue-app">
+        <section id="links">
+            <a v-for="app in apps" v-bind:href="'apps/' + app">
+                {{app}}
+            </a>
+        </section>
+        <section id="cubeContainer">
+            <div id="cube" class="is-spinning">
+                <div class="cube__face cube__face--front"></div>
+                <div class="cube__face cube__face--back"></div>
+                <div class="cube__face cube__face--right"></div>
+                <div class="cube__face cube__face--left"></div>
+                <div class="cube__face cube__face--top"></div>
+                <div class="cube__face cube__face--bottom"></div>
             </div>
         </section>
-        <section v-if=!menuVisible id=counters>
-            <life-counter v-for="counter in counters" v-bind:init-rotation="counter.initRotation" v-bind:init-count="counter.initCount"></life-counter>
-        </section>
-    </section>
-
-    <script src="assets/javascripts/localforage.min.js"></script>
-    <script src="assets/javascripts/vue.js"></script>
-    <script src="worker.js"></script>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="assets/javascripts/script.js"></script>
 </body>
 

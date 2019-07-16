@@ -1,10 +1,11 @@
 {
-  "name": "Life Counter",
-  "short_name": "Life Counter",
-  "display": "fullscreen",
-  "orientation": "landscape",
-  "start_url": "../../index.html",
+  "name": "Magic: The Gathering App",
+  "short_name": "MTG App",
+  "display": "standalone",
+  "orientation": "any",
+  "start_url": "/index.html",
   "scope": "/",
+  "background_color": "#000000",
   "icons": [
     {
       "src": "../images/icons/icon-36.png",
