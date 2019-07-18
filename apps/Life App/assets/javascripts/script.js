@@ -33,30 +33,16 @@ Vue.component("life-counter", {
                         rotateStyle = "rotate(" + closestUpright + "deg)"
                     }
                 }
-
             } else {
                 rotateStyle = "rotate(" + this.rotation + "deg)"
             }
-
             let backgroundStyle = "backgroundImage: url(" + this.image + ")";
-
-            // let sizeStyle;
-            // if(this.rotation % 180 == 0){
-            //     sizeStyle = `
-            //     --counter-width: 40vw;
-            //     --counter-height: 45vh;`
-            // }else{
-            //     sizeStyle = `
-            //     --counter-width: 40vh;
-            //     --counter-height: 45vw;`
-            // }
-
             let transformStyle = "transform: " + rotateStyle;
             return backgroundStyle + ";" + transformStyle;
         }
     },
     template: `
-        <div class="life-counter" :style=computedStyle v-on:click="setActive">
+        <div class="life-counter" :style=computedStyle>
             <div class="display">
                 <button class="count" v-on:click="count--">-</button>
                 <p v-bind:class="{ contrasted: image!='' }" v-on:click="toggleEdit">{{ count }}</p>
@@ -99,17 +85,7 @@ Vue.component("life-counter", {
                 .then(cardJson => {
                     this.autoCards = cardJson.data;
                 }).catch(error => console.log(error));
-        },
-        invertTheme: function () {
-            let inverted = 255 - this.$el.style.getPropertyValue("--base-color");
-            this.$el.style.setProperty('--base-color', inverted);
-        },
-        setActive: function () {
-            this.$root.activeCounter = this;
         }
-    },
-    created: function () {
-
     }
 })
 
@@ -125,66 +101,61 @@ class CounterObject {
     }
 }
 
+const modes = {
+    COMMANDER: "commander",
+    CONSTRUCTED: "constructed",
+    OATHBRAKER: "oathbraker",
+    TWOPLAYERCOMMANDER: "1v1 commander"
+}
+
 let main = new Vue({
     el: "#vue-app",
     data: {
         counters: [],
-        menuVisible: false,
-        defaultDelay: 500,
-        defaultMenuRatio: "0.05",
-        orientation: screen.orientation.angle
+        mode: "",
     },
     methods: {
-        addCounter: function (startAmount) {
-            this.hideMenu();
-            this.counters.push(new CounterObject(0, startAmount));
-            if (this.counters.length == 3) {
-                this.counters[0].flip();
-                this.counters[1].flip();
+        addCounter: function (orientation, startAmount) {
+            this.counters.push(new CounterObject(orientation, startAmount));
+        },
+        resetCounters: function () {
+            this.counters = [];
+            let outerThis = this;
+            setTimeout(function () {
+                if (outerThis.mode == modes.COMMANDER) {
+                    outerThis.addCounter(180, 40);
+                    outerThis.addCounter(180, 40);
+                    outerThis.addCounter(0, 40);
+                    outerThis.addCounter(0, 40);
+                } else if (outerThis.mode == modes.CONSTRUCTED) {
+                    outerThis.addCounter(180, 20);
+                    outerThis.addCounter(0, 20);
+                } else if (outerThis.mode == modes.OATHBRAKER) {
+                    outerThis.addCounter(180, 20);
+                    outerThis.addCounter(180, 20);
+                    outerThis.addCounter(0, 20);
+                    outerThis.addCounter(0, 20);
+                } else if (outerThis.mode == modes.TWOPLAYERCOMMANDER) {
+                    outerThis.addCounter(180, 40);
+                    outerThis.addCounter(0, 40);
+                }
+            }, 1);
+        },
+        setCounters: function () {
+            if (screen.orientation.angle == 0) {
+                this.mode = modes.CONSTRUCTED;
+            } else if (screen.orientation.angle == 90) {
+                this.mode = modes.COMMANDER;
+            } else if (screen.orientation.angle == 270) {
+                this.mode = modes.OATHBRAKER;
+            } else {
+                this.mode = modes.TWOPLAYERCOMMANDER;
             }
-        },
-        removeCounter: function () {
-            this.hideMenu();
-            this.counters.pop();
-            if (this.counters.length == 2) {
-                this.counters[0].flip();
-                this.counters[1].flip();
-            }
-        },
-        removeAllCounters: function () {
-            let outsideThis = this;
-            let removeAmount = outsideThis.counters.length;
-            for (let i = 0; i < removeAmount; i++) {
-                setTimeout(function () {
-                    outsideThis.removeCounter();
-                }, i * outsideThis.defaultDelay);
-            }
-            return removeAmount * outsideThis.defaultDelay;
-        },
-        toggleMenu: function () {
-            this.menuVisible = !this.menuVisible;
-        },
-        hideMenu: function () {
-            this.menuVisible = false;
-        },
-        resetCounters: function (playerAmount, startAmount) {
-            let outsideThis = this;
-            let delay = outsideThis.removeAllCounters();
-            for (let i = 0; i < playerAmount; i++) {
-                setTimeout(function () {
-                    outsideThis.addCounter(startAmount);
-                }, delay + i * outsideThis.defaultDelay);
-            }
+            this.resetCounters();
         }
-    },
-    beforeMount: function () {
-
     },
     mounted: function () {
-        if (this.orientation % 180 == 0) {
-            this.resetCounters(2, 20);
-        } else {
-            this.resetCounters(4, 40);
-        }
+        this.setCounters();
+        screen.orientation.addEventListener('change', this.setCounters);
     }
 })

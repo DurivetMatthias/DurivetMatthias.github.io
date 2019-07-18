@@ -4,6 +4,7 @@
 
 body {
   background-color: black;
+  overflow: hidden;
 }
 
 button {
@@ -12,71 +13,41 @@ button {
   color: white;
 }
 
-#menu {
-  transition: width 0.5s ease-in-out;
-}
-
 #counters {
   display: flex;
-}
-
-#hamburger {
-  height: var(--menu-height);
-  width: calc(100vw - 2px);
-  color: white;
-  font-size: calc(var(--menu-height) * 0.7);
-  line-height: var(--menu-height);
-  text-align: center;
-  border: 1px solid white;
-}
-
-#slidingMenu {
-  color: white;
-  display: flex;
-  flex-flow: column;
-  flex-wrap: nowrap;
-}
-
-#slidingMenu > button {
-  height: var(--menu-height);
-  width: 100%;
-  display: block;
-  text-align: center;
-  border: 1px solid white;
+  height: 100vh;
+  width: 100vw;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 /* Orientation based CSS */
 @media (orientation: landscape) {
   :root {
-    --menu-ratio: 0.14;
-    --counter-width: 35vw;
-    --counter-height: 35vh;
-    --menu-height: calc(100vh * var(--menu-ratio));
-    --content-height: calc(100vh - var(--menu-height));
+    --counter-width: 40vw;
+    --counter-height: 45vh;
+  }
+
+  #counters {
+    flex-flow: row;
+    flex-wrap: wrap;
+  }
+
+  .display {
+    --number-height: calc(var(--counter-height) / 2);
   }
 }
 
 /* Orientation based CSS */
 @media (orientation: portrait) {
   :root {
-    --menu-ratio: 0.08;
-    --counter-width: 35vh;
-    --counter-height: 35vh;
-    --menu-height: calc(100vh * var(--menu-ratio));
-    --content-height: calc(100vh - var(--menu-height));
-  }
-
-  #menu {
-    height: var(--menu-height);
-    width: 100vw;
+    --counter-width: 40vh;
+    --counter-height: 40vh;
   }
 
   #counters {
-    height: var(--content-height);
     flex-flow: column;
     flex-wrap: nowrap;
-    align-items: center;
-    justify-content: space-evenly;
   }
 
   .display {
