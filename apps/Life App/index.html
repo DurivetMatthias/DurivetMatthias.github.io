@@ -12,9 +12,43 @@
 <body>
     <div id="vue-app">
         <section id=counters>
+            <div id="infoButton" v-on:click="showInfo=true">i</div>
             <life-counter v-for="counter in counters" v-bind:init-rotation="counter.initRotation"
                 v-bind:init-count="counter.initCount">
             </life-counter>
+        </section>
+        <section id="info" v-if="showInfo" v-on:click="showInfo=false">
+            <div id="compassCenter" v-bind:style="compassStyle">
+                <div id="needleWrapper" v-bind:style="uprightStyle">
+                    <div id="deviceRotation" v-bind:style="deviceRotation">
+                        <div id="needle" class="center"></div>
+                    </div>
+                </div>
+                <div class="north">
+                    <div v-bind:style="uprightStyle">
+                        <p class="compassText translateCenter">
+                            {{alpha}}
+                            {{beta}}
+                            {{gamma}}
+                            {{angle}}</p>
+                    </div>
+                </div>
+                <div class="east">
+                    <div v-bind:style="uprightStyle">
+                        <p class="compassText translateCenter">Commander</p>
+                    </div>
+                </div>
+                <div class="south">
+                    <div v-bind:style="uprightStyle">
+                        <p class="compassText translateCenter">1v1 Commander</p>
+                    </div>
+                </div>
+                <div class="west">
+                    <div v-bind:style="uprightStyle">
+                        <p class="compassText translateCenter">Oathbraker</p>
+                    </div>
+                </div>
+            </div>
         </section>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>

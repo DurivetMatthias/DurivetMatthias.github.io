@@ -113,6 +113,14 @@ let main = new Vue({
     data: {
         counters: [],
         mode: "",
+        showInfo: false,
+        compassStyle: "",
+        uprightStyle: "",
+        deviceRotation: "",
+        alpha: 0,
+        beta: 0,
+        gamma: 0,
+        angle: 0,
     },
     methods: {
         addCounter: function (orientation, startAmount) {
@@ -141,7 +149,7 @@ let main = new Vue({
                 }
             }, 1);
         },
-        setCounters: function () {
+        onOrientationChange: function () {
             if (screen.orientation.angle == 0) {
                 this.mode = modes.CONSTRUCTED;
             } else if (screen.orientation.angle == 90) {
@@ -151,11 +159,32 @@ let main = new Vue({
             } else {
                 this.mode = modes.TWOPLAYERCOMMANDER;
             }
+            this.compassStyle = `transform: rotate(-${screen.orientation.angle}deg)`;
+            this.uprightStyle = `transform: rotate(${screen.orientation.angle}deg)`;
             this.resetCounters();
+        },
+        showHelpSection: function () {
+            this.showInfo = true;
         }
     },
     mounted: function () {
-        this.setCounters();
-        screen.orientation.addEventListener('change', this.setCounters);
+        this.onOrientationChange();
+        screen.orientation.addEventListener('change', this.onOrientationChange);
+        this.showHelpSection();
+
+        //Live Background
+        // if (window.DeviceOrientationEvent) {
+        //     alert("supported");
+        // } else {
+        //     alert("not supported");
+        // }
+        let outerThis = this;
+        window.addEventListener("deviceorientation", function (event) {
+            let ratio = 1.4;
+            let roundedGamma = Math.floor(event.gamma);
+            let rotation = Math.round(- roundedGamma * ratio - screen.orientation.angle);
+            //alert(`-${roundedGamma} - ${screen.orientation.angle} = ${rotation}`);
+            outerThis.deviceRotation = `transform: rotateZ(${rotation}deg)`;
+        }, true);
     }
 })
