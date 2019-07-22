@@ -12,7 +12,8 @@
 <body>
     <div id="vue-app">
         <section id=counters>
-            <div id="infoButton" v-on:click="showInfo=true">i</div>
+            <div v-if="showInfo" id="infoButton" v-on:click="showInfo=false">X</div>
+            <div v-else id="infoButton" v-on:click="showInfo=true">i</div>
             <life-counter v-for="counter in counters" v-bind:init-rotation="counter.initRotation"
                 v-bind:init-count="counter.initCount">
             </life-counter>
@@ -26,11 +27,7 @@
                 </div>
                 <div class="north">
                     <div v-bind:style="uprightStyle">
-                        <p class="compassText translateCenter">
-                            {{alpha}}
-                            {{beta}}
-                            {{gamma}}
-                            {{angle}}</p>
+                        <p class="compassText translateCenter">Constructed</p>
                     </div>
                 </div>
                 <div class="east">
